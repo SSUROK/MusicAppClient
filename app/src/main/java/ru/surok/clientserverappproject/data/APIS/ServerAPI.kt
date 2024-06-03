@@ -2,28 +2,26 @@ package ru.surok.clientserverappproject.data.APIS
 
 import okhttp3.ResponseBody
 import retrofit2.Call
+import retrofit2.http.Body
 import retrofit2.http.GET
-import retrofit2.http.Path
-import retrofit2.http.QueryMap
 import retrofit2.http.Streaming
-import ru.surok.clientserverappproject.data.models.FreeSoundSearchResponse
-import ru.surok.clientserverappproject.data.models.MusicSample
-import ru.surok.clientserverappproject.data.models.ServerResponse
+import ru.surok.clientserverappproject.data.models.Album
+import ru.surok.clientserverappproject.data.models.AlbumResponse
+import ru.surok.clientserverappproject.data.models.ArtistResponse
+import ru.surok.clientserverappproject.data.models.LibraryResponse
 
 interface ServerAPI {
 
     @GET("library")
-    fun getLibrary(): Call<ServerResponse>
+    fun getLibrary(): Call<LibraryResponse>
 
-    @GET("song/file/{id}")
+    @GET("resource")
     @Streaming
-    suspend fun getSongFile(
-        @Path("id") id: String,
-    ): ResponseBody
+    fun getFile(@Body path: String): ResponseBody
 
-    @GET("song/cover/{id}")
-    @Streaming
-    suspend fun getSongCover(
-        @Path("id") id: String,
-    ): ResponseBody
+    @GET("album")
+    fun getAlbum(@Body id: String): Call<AlbumResponse>
+
+    @GET("artist")
+    fun getArtist(@Body id: String): Call<ArtistResponse>
 }

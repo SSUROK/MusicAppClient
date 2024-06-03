@@ -24,7 +24,7 @@ class LibraryPageFragment : Fragment() {
     ): View? {
         binding = FragmentLibraryPageBinding.inflate(inflater, container, false)
         viewModel.getLibraryFromRepo()
-        val adapter = LibraryAdapter()
+        val adapter = LibraryAdapter(viewLifecycleOwner)
         val recyclerView: RecyclerView = binding.albums
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(activity)

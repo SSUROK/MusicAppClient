@@ -1,5 +1,7 @@
 //package ru.surok.clientserverappproject.views.viewModels
 //
+//import android.graphics.Bitmap
+//import android.graphics.BitmapFactory
 //import androidx.lifecycle.LiveData
 //import androidx.lifecycle.MutableLiveData
 //import androidx.lifecycle.ViewModel
@@ -10,12 +12,13 @@
 //class SongElementViewModel:ViewModel() {
 //
 //    private val serverRepo = ServerRepo()
-//    var img: LiveData<ByteArray>? = null
+//    var img: MutableLiveData<Bitmap> = MutableLiveData()
 //
-//    fun getCover(id: Int) {
+//    fun getCover(path: String) {
 //        viewModelScope.launch {
-//            serverRepo.getMusicCover(id) { result ->
-//                img = MutableLiveData(result)
+//            serverRepo.getResource(path) { result ->
+//                val drawable = BitmapFactory.decodeByteArray(result, 0, result!!.size)
+//                img.postValue(drawable)
 //            }
 //        }
 //    }

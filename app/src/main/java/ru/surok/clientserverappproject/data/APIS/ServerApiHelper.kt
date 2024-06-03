@@ -15,7 +15,7 @@ object ServerApiHelper {
     val retrofit: ServerAPI by lazy {
         Retrofit.Builder()
             .client(client)
-            .baseUrl("http://192.168.0.203:8080/")
+            .baseUrl("http://192.168.1.129:8080/")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
             .create(ServerAPI::class.java)
