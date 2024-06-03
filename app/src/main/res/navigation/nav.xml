@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav"
+    app:startDestination="@id/mainPageFragment">
+
+    <fragment
+        android:id="@+id/mainPageFragment"
+        android:name="ru.surok.clientserverappproject.views.pages.MainPageFragment"
+        android:label="fragment_main_page"
+        tools:layout="@layout/fragment_main_page" />
+    <fragment
+        android:id="@+id/mainPageBottom"
+        android:name="ru.surok.clientserverappproject.views.pages.MainPageBottom"
+        android:label="fragment_main_page_bottom"
+        tools:layout="@layout/fragment_main_page_bottom" />
+    <fragment
+        android:id="@+id/socialPageFragment"
+        android:name="ru.surok.clientserverappproject.views.pages.SocialPageFragment"
+        android:label="fragment_social_page"
+        tools:layout="@layout/fragment_social_page" />
+    <fragment
+        android:id="@+id/searchPageFragment"
+        android:name="ru.surok.clientserverappproject.views.pages.SearchPageFragment"
+        android:label="fragment_search_page"
+        tools:layout="@layout/fragment_search_page" />
+    <fragment
+        android:id="@+id/libraryPageFragment"
+        android:name="ru.surok.clientserverappproject.views.pages.LibraryPageFragment"
+        android:label="fragment_library_page"
+        tools:layout="@layout/fragment_library_page" />
+</navigation>

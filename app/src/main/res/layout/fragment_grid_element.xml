@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".views.elements.GridElementFragment">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="@dimen/cover_size_normal"
+        android:layout_height="@dimen/cover_size_normal"
+        app:cardCornerRadius="@dimen/radius_small"
+        app:cardBackgroundColor="@android:color/transparent">
+
+        <GridLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:columnCount="3">
+
+            <ImageView
+                android:layout_width="@dimen/cover_size_extra_small"
+                android:layout_height="@dimen/cover_size_extra_small"
+                android:src="@drawable/bends"/>
+            <ImageView
+                android:layout_width="@dimen/cover_size_extra_small"
+                android:layout_height="@dimen/cover_size_extra_small"
+                android:src="@drawable/burzum"/>
+            <ImageView
+                android:layout_width="@dimen/cover_size_extra_small"
+                android:layout_height="@dimen/cover_size_extra_small"
+                android:src="@drawable/deathconsciousness"/>
+            <ImageView
+                android:layout_width="@dimen/cover_size_extra_small"
+                android:layout_height="@dimen/cover_size_extra_small"
+                android:src="@drawable/kglw1"/>
+            <ImageView
+                android:layout_width="@dimen/cover_size_extra_small"
+                android:layout_height="@dimen/cover_size_extra_small"
+                android:src="@drawable/lor_cover"/>
+            <ImageView
+                android:layout_width="@dimen/cover_size_extra_small"
+                android:layout_height="@dimen/cover_size_extra_small"
+                android:src="@drawable/kglw2"/>
+            <ImageView
+                android:layout_width="@dimen/cover_size_extra_small"
+                android:layout_height="@dimen/cover_size_extra_small"
+                android:src="@drawable/bends"/>
+            <ImageView
+                android:layout_width="@dimen/cover_size_extra_small"
+                android:layout_height="@dimen/cover_size_extra_small"
+                android:src="@drawable/bends"/>
+            <ImageView
+                android:layout_width="@dimen/cover_size_extra_small"
+                android:layout_height="@dimen/cover_size_extra_small"
+                android:src="@drawable/bends"/>
+        </GridLayout>
+    </androidx.cardview.widget.CardView>
+</FrameLayout>

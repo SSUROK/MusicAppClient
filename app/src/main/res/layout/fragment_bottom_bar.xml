@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    style="@style/BottomBar"
+    tools:context=".views.elements.BottomBarFragment">
+
+<!--    <androidx.fragment.app.FragmentContainerView-->
+<!--        android:id="@+id/bottomBar"-->
+<!--        android:name="ru.surok.clientserverappproject.views.elements.BottomBarFragment"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        tools:layout="@layout/fragment_bottom_bar" />-->
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_navigatin_view"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="0dp"
+        android:layout_marginEnd="0dp"
+        android:background="?android:attr/windowBackground"
+        app:menu="@menu/bottom_bar" />
+
+
+<!--    <LinearLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:layout_gravity="center"-->
+<!--        android:orientation="horizontal"-->
+<!--        tools:layout="@layout/fragment_bottom_bar">-->
+
+
+<!--        <ImageButton-->
+<!--            android:id="@+id/mainPageButton"-->
+<!--            style="@style/BottomBarItem"-->
+<!--            android:contentDescription="@string/bottom_bar_btn"-->
+<!--            android:src="@drawable/music_square" />-->
+<!--        <ImageButton-->
+<!--            android:id="@+id/socialButton"-->
+<!--            style="@style/BottomBarItem"-->
+<!--            android:contentDescription="@string/bottom_bar_btn"-->
+<!--            android:src="@drawable/note_2" />-->
+<!--        <ImageButton-->
+<!--            android:id="@+id/searchButton"-->
+<!--            style="@style/BottomBarItem"-->
+<!--            android:contentDescription="@string/bottom_bar_btn"-->
+<!--            android:src="@drawable/search_normal" />-->
+<!--        <ImageButton-->
+<!--            android:id="@+id/library"-->
+<!--            style="@style/BottomBarItem"-->
+<!--            android:contentDescription="@string/bottom_bar_btn"-->
+<!--            android:src="@drawable/musilib" />-->
+
+<!--        <com.google.android.material.switchmaterial.SwitchMaterial-->
+<!--            android:id="@+id/themeSwitcher"-->
+<!--            android:layout_gravity="start"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"/>-->
+<!--    </LinearLayout>-->
+</FrameLayout>
+

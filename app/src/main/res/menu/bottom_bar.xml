@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/mainPageFragment"
+        android:title="Main"
+        android:icon="@drawable/music_square" />
+    <item
+        android:id="@+id/socialPageFragment"
+        android:title="Social"
+        android:icon="@drawable/note_2" />
+    <item
+        android:id="@+id/searchPageFragment"
+        android:title="Search"
+        android:icon="@drawable/search_normal" />
+    <item
+        android:id="@+id/libraryPageFragment"
+        android:title="Library"
+        android:icon="@drawable/musilib" />
+</menu>

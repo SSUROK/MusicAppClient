@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/block_size"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".views.elements.MediaList">
+
+    <androidx.cardview.widget.CardView
+        style="@style/TextPageCard">
+
+        <TextView
+            style="@style/SecondaryCardNameText"
+            android:text="@string/card_text_suggest_create" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/margin_default"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                app:cardBackgroundColor="@color/black"
+                android:layout_marginVertical="@dimen/margin_default"
+                app:cardCornerRadius="@dimen/radius_small">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/add"
+                        android:layout_width="32dp"
+                        android:layout_gravity="center"
+                        android:layout_marginHorizontal="@dimen/margin_big"
+                        android:layout_height="32dp"
+                        android:src="@drawable/add_icon" />
+
+                    <TextView
+                        android:id="@+id/text1"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginHorizontal="@dimen/margin_big"
+                        android:gravity="center|start"
+                        android:text="@string/item_create_article"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/text_size_normal"
+                        android:textStyle="bold|italic" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardBackgroundColor="@color/black"
+                app:cardCornerRadius="@dimen/radius_small">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/text2"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginHorizontal="@dimen/margin_big"
+                        android:gravity="center"
+                        android:text="@string/item_suggest_comment"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/text_size_normal"
+                        android:textStyle="bold|italic" />
+
+                    <GridView
+                        android:id="@+id/albumGrid"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_margin="@dimen/margin_big"
+                        android:horizontalSpacing="5dp"
+                        android:verticalSpacing="5dp"/>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+
+</FrameLayout>

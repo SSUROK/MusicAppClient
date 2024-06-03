@@ -1,0 +1,27 @@
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+<!-- Define the background properties like color etc -->
+<item android:id="@android:id/background">
+    <vector
+        android:viewportWidth="45"
+        android:viewportHeight="45"
+        android:width="45dp"
+        android:height="45dp">
+        <path
+            android:pathData="M15 9.35832C15 8.58887 15.8758 8.14706 16.4946 8.6043L34.2802 21.7453C34.7874 22.1201 34.7874 22.8786 34.2803 23.2533L16.4946 36.3956C15.8758 36.8529 15 36.4111 15 35.6416L15 9.35832Z"
+            android:fillColor="@color/button_icon" />
+    </vector>
+</item>
+
+<!-- Define the progress properties like start color, end color etc -->
+<item android:id="@android:id/progress">
+    <clip>
+        <shape
+            android:shape="oval">
+            <solid
+                android:color="@color/black"/>
+        </shape>
+    </clip>
+</item>
+</layer-list>
+

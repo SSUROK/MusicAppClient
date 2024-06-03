@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/block_size"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".views.elements.MediaList">
+
+    <androidx.cardview.widget.CardView
+        style="@style/TextPageCard">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center">
+            <TextView
+                android:text="@string/card_text_new_curators"
+                style="@style/SecondaryCardNameText"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/imageRecyclerList"
+                android:layout_width="match_parent"
+                android:layout_marginHorizontal="@dimen/margin_big"
+                android:layout_height="match_parent" />
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+
+</FrameLayout>

@@ -1,0 +1,36 @@
+<resources>
+    <string name="app_name">TestApp</string>
+    <string name="bottom_bar_btn">Bottom Bar Button</string>
+    <string name="cover_card">Card cover image</string>
+    <string name="card_music_album_otd">Альбом дня</string>
+    <string name="card_music_albums_otw">Альбомы недели</string>
+    <string name="card_music_wave">Твоя Волна</string>
+    <string name="card_music_rec_playlist">Рекомедуемые плейлисты</string>
+    <string name="card_music_rec_curator">Ваши кураторы рекомендуют</string>
+    <string name="card_music_last_release">Вот как прошел ваш последний релиз</string>
+    <string name="card_text_name">Чтиво Дня</string>
+    <string name="card_text_new_curators">Новые статьи от кураторов</string>
+    <string name="card_text_suggest_create">Всем хочется услышать ваше мнение</string>
+    <string name="card_text_rumors">Вот что говорят слушатели похожие на вас </string>
+    <string name="search_bar">Найти</string>
+    <string name="default_name">The Bends</string>
+    <string name="main_page_go_down">Больше музыки внизу</string>
+    <string name="item_create_article">Напишите целую статью о том самом Альбоме</string>
+    <string name="item_suggest_comment">Или просто дайте комментарий по недавно прослушанным трекам</string>
+    <string name="wave_description">Создайте идеальный бесконечный плейлист</string>
+    <string name="wave_settings_name">Настроить</string>
+    <string name="search_default">Поиск</string>
+    <string name="text_list_item_name_placeholder">Вставьте имя элемента сюда</string>
+    <string name="fish">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </string>
+    <string name="clear_text_btn">Очистить поиск</string>
+    <string name="empty_search_result">Увы, но ничего найти не удалось</string>
+    <string name="library_is_empty">Библиотека пока пуста, попробуйте отметить понравившиеся треки</string>
+    <string name="no_active_account">Чтобы сохранять понравившиеся песни, войдите в аккаунт</string>
+    <string name="dark_theme_preference">dark_theme_key</string>
+    <string name="history_preference">history_key</string>
+    <string name="shared_pref_name_key">shared_pref_key</string>
+    <string name="clear_history_btn">Очистить историю</string>
+    <string name="no_internet_connection">Нет подключения к интернету</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>
