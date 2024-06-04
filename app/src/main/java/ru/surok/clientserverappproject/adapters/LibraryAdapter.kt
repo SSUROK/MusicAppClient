@@ -41,7 +41,9 @@ class LibraryAdapter(private val observer: LifecycleOwner): RecyclerView.Adapter
         item.cover.observe(observer) {
             holder.coverImage.setImageBitmap(it)
         }
-        holder.author.text = item.artist[0].title
+        item.artist.observe(observer) {
+            holder.author.text = it[0]?.title
+        }
         holder.songName.text = item.title
     }
     override fun getItemCount() = data.size

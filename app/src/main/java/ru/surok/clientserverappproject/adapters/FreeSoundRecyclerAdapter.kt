@@ -3,7 +3,9 @@ package ru.surok.clientserverappproject.adapters
 import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.OnClickListener
 import android.view.ViewGroup
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.net.toUri
@@ -17,7 +19,9 @@ import java.io.InputStream
 import java.net.URL
 
 
-class FreeSoundRecyclerAdapter(private val data: List<FreeSoundSound?>?): RecyclerView.Adapter<FreeSoundRecyclerAdapter.ViewHolder>() {
+class FreeSoundRecyclerAdapter(private val data: List<FreeSoundSound?>?,
+                               private val onClickListener: ListOnClickListener,):
+    RecyclerView.Adapter<FreeSoundRecyclerAdapter.ViewHolder>(){
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val coverImage: ImageView =
             view.findViewById(R.id.coverImageSongElem)
@@ -25,6 +29,8 @@ class FreeSoundRecyclerAdapter(private val data: List<FreeSoundSound?>?): Recycl
             view.findViewById(R.id.bandNameSongElem)
         val songName: TextView =
             view.findViewById(R.id.songNameSongElem)
+        val addButton: ImageButton =
+            view.findViewById(R.id.addBtn)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType:
@@ -48,6 +54,14 @@ class FreeSoundRecyclerAdapter(private val data: List<FreeSoundSound?>?): Recycl
 
         holder.author.text = item?.username
         holder.songName.text = item?.name
+        holder.addButton.visibility = View.VISIBLE
+        holder.addButton.setOnClickListener{
+            if (item != null) {
+                onClickListener.onClick(it, item)
+            }
+        }
     }
+
+
     override fun getItemCount() = data!!.size
 }

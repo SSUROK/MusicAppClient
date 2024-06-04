@@ -7,28 +7,37 @@ import android.os.Handler
 import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.OnClickListener
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.core.widget.addTextChangedListener
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import ru.surok.clientserverappproject.R
 import ru.surok.clientserverappproject.adapters.FreeSoundRecyclerAdapter
 import ru.surok.clientserverappproject.adapters.HistoryRecyclerAdapter
+import ru.surok.clientserverappproject.adapters.ListOnClickListener
+import ru.surok.clientserverappproject.data.models.FreeSoundSound
 import ru.surok.clientserverappproject.data.models.HistoryElement
 import ru.surok.clientserverappproject.data.repos.FreeSoundRepo
 import ru.surok.clientserverappproject.databinding.FragmentSearchPageBinding
+import ru.surok.clientserverappproject.views.viewModels.LibraryPageViewModel
+import ru.surok.clientserverappproject.views.viewModels.SearchPageViewModel
 
-class SearchPageFragment : Fragment() {
+class SearchPageFragment : Fragment(), ListOnClickListener {
 
     private var searchString = ""
     private lateinit var binding : FragmentSearchPageBinding
     private lateinit var sharedPrefs : SharedPreferences
     private lateinit var mainThreadHandler : Handler
     private val searchRunnable = Runnable {searchFreeSound()}
+    private val viewModel: SearchPageViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -143,7 +152,7 @@ class SearchPageFragment : Fragment() {
             if (sounds == null) {
                 binding.noInternetCard.visibility = View.VISIBLE
             } else {
-                val adapter = FreeSoundRecyclerAdapter(sounds.results)
+                val adapter = FreeSoundRecyclerAdapter(sounds.results, this)
                 val recyclerView: RecyclerView = binding.recyclerView
                 if (sounds.count == 0) {
                     recyclerView.visibility = View.GONE
@@ -165,5 +174,10 @@ class SearchPageFragment : Fragment() {
     companion object {
         const val SEARCH_STRING = "SEARCH_STRING"
         private const val SEARCH_DEBOUNCE_DELAY = 2000L
+    }
+
+    override fun onClick(view: View, item: FreeSoundSound)  {
+        val drawable = view.findViewById<ImageView>(R.id.coverImageSongElem)
+        viewModel.addSound(item)
     }
 }

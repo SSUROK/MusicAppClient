@@ -1,5 +1,7 @@
 package ru.surok.clientserverappproject.data.repos
 
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
@@ -15,10 +17,16 @@ import ru.surok.clientserverappproject.data.models.ArtistResponse
 import ru.surok.clientserverappproject.data.models.LibraryResponse
 import ru.surok.clientserverappproject.data.models.Music
 import ru.surok.clientserverappproject.data.models.MusicDTO
+import ru.surok.clientserverappproject.data.models.MusicRequest
+import ru.surok.clientserverappproject.data.models.MusicResponse
 import java.io.ByteArrayOutputStream
 
 class ServerRepo {
     private val retrofit = ServerApiHelper.retrofit
+
+    private val downloadedCovers = mutableMapOf<String, Bitmap>()
+    private val cachedArtists = mutableMapOf<String, Artist>()
+    private val cachedAlbums  = mutableMapOf<String, Album>()
 
     fun getLibrary(callback: (List<MusicDTO>?) -> Unit) {
         val call = retrofit.getLibrary().enqueue(object : Callback<LibraryResponse> {
@@ -29,8 +37,31 @@ class ServerRepo {
                 if (response.isSuccessful) {
                     if (response.code() == 200) {
                         val result = response.body()?.result
-                        val resultDto = result?.map{ it.toMusicDTO() }
-                        callback(resultDto)
+                        if (result != null) {
+                            val resultDto = result.map{it.toMusicDTO()}
+                            for (i in result.indices)  {
+                                if (cachedArtists.containsKey(result[i].artist_id[0])){
+                                    resultDto[i].artist.postValue(listOf(cachedArtists[result[i].artist_id[0]]))
+                                } else{
+                                    assignArtist(result[i].artist_id[0], resultDto[i])
+                                }
+
+                                if (cachedAlbums.containsKey(result[i].albumn_id[0])){
+                                    resultDto[i].album.postValue(listOf(cachedAlbums[result[i].albumn_id[0]]))
+                                } else{
+                                    assignAlbum(result[i].albumn_id[0], resultDto[i])
+                                }
+
+                                if (downloadedCovers.containsKey(result[i].albumn_id[0])){
+                                    resultDto[i].cover.postValue(downloadedCovers[result[i].albumn_id[0]])
+                                } else{
+                                    resultDto[i].album.value?.get(0)
+                                        ?.let { assignCover(it.cover_path, resultDto[i]) }
+                                }
+                            }
+                            callback(resultDto)
+                        }
+                        callback(null)
                     }
                 } else {
                     println(response.errorBody()?.string())
@@ -44,9 +75,37 @@ class ServerRepo {
         })
     }
 
-    fun getArtist(id: String) : Artist?{
-        var resp: Artist?  = null
-        val call = retrofit.getArtist(id).enqueue(object : Callback<ArtistResponse> {
+    private fun assignArtist(id: String, music: MusicDTO)  {
+        getArtist(id) {
+            if (it != null) {
+                music.artist.postValue(listOf(it))
+                cachedArtists[id] = it
+            }
+        }
+    }
+
+    private fun assignAlbum(id: String, music: MusicDTO)  {
+        getAlbum(id) {
+            if (it!= null) {
+                music.album.postValue(listOf(it))
+                cachedAlbums[id] = it
+            }
+        }
+    }
+
+    private fun assignCover(path: String, music: MusicDTO)  {
+        getResource(path) {
+            if (it!= null) {
+                val bitmap = BitmapFactory.decodeByteArray(it, 0, it.size)
+                music.cover.postValue(bitmap)
+                downloadedCovers[path] = bitmap
+            }
+        }
+    }
+
+    fun getArtist(id: String, callback: (Artist?) -> Unit){
+        val params = mapOf("id" to id)
+        val call = retrofit.getArtist(params).enqueue(object : Callback<ArtistResponse> {
             override fun onResponse(
                 call: Call<ArtistResponse>,
                 response: Response<ArtistResponse>
@@ -54,7 +113,7 @@ class ServerRepo {
                 if (response.isSuccessful) {
                     if (response.code() == 200) {
                         val result = response.body()?.result
-                        resp = result
+                        callback(result)
                     }
                 } else {
                     println(response.errorBody()?.string())
@@ -63,14 +122,14 @@ class ServerRepo {
 
             override fun onFailure(call: Call<ArtistResponse>, t: Throwable) {
                 t.printStackTrace()
+                callback(null)
             }
         })
-        return resp
     }
 
-    fun getAlbum(id: String): Album?{
-        var resp: Album?  = null
-        val call = retrofit.getAlbum(id).enqueue(object : Callback<AlbumResponse> {
+    fun getAlbum(id: String, callback: (Album?) -> Unit){
+        val params = mapOf("id" to id)
+        val call = retrofit.getAlbum(params).enqueue(object : Callback<AlbumResponse> {
             override fun onResponse(
                 call: Call<AlbumResponse>,
                 response: Response<AlbumResponse>
@@ -78,7 +137,7 @@ class ServerRepo {
                 if (response.isSuccessful) {
                     if (response.code() == 200) {
                         val result = response.body()?.result
-                        resp = result
+                        callback(result)
                     }
                 } else {
                     println(response.errorBody()?.string())
@@ -87,15 +146,16 @@ class ServerRepo {
 
             override fun onFailure(call: Call<AlbumResponse>, t: Throwable) {
                 t.printStackTrace()
+                callback(null)
             }
         })
-        return resp
     }
 
     fun getResource(file: String, callback: (ByteArray?) -> Unit) {
         runBlocking {
             launch(Dispatchers.IO) {
-                val call = retrofit.getFile(file)
+                val params = mapOf("path" to file)
+                val call = retrofit.getFile(params)
                 val io = call.byteStream()
                 val outputStream = ByteArrayOutputStream()
                 io.copyTo(outputStream)
@@ -107,5 +167,28 @@ class ServerRepo {
                 callback(fileBytes)
             }
         }
+    }
+
+    fun addMusic(request: MusicRequest, callback:  (Music?)  -> Unit)  {
+        retrofit.postMusic(request).enqueue(object  : Callback<MusicResponse>  {
+            override fun onResponse(
+                call: Call<MusicResponse>,
+                response: Response<MusicResponse>
+            ) {
+                if (response.isSuccessful) {
+                    if (response.code() == 200) {
+                        val result = response.body()?.result
+                        callback(result)
+                    }
+                } else {
+                    println(response.errorBody()?.string())
+                }
+            }
+
+            override fun onFailure(call: Call<MusicResponse>, t: Throwable) {
+                t.printStackTrace()
+                callback(null)
+            }
+        })
     }
 }

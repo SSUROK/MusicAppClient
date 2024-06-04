@@ -9,6 +9,8 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
+import ru.surok.clientserverappproject.data.models.Album
+import ru.surok.clientserverappproject.data.models.Artist
 import ru.surok.clientserverappproject.data.models.Music
 import ru.surok.clientserverappproject.data.models.MusicDTO
 import ru.surok.clientserverappproject.data.repos.ServerRepo
@@ -18,7 +20,6 @@ class LibraryPageViewModel:ViewModel() {
 
     private val serverRepo = ServerRepo()
     val library: MutableLiveData<List<MusicDTO>?> = MutableLiveData()
-    private val downloadedCovers = mutableMapOf<String, Bitmap>()
 
     fun getLibraryFromRepo() {
         viewModelScope.launch(Dispatchers.IO) {
@@ -26,28 +27,31 @@ class LibraryPageViewModel:ViewModel() {
                 if (result.isNullOrEmpty()) {
                     return@getLibrary
                 } else {
-                    for (r in result){
-                        if (downloadedCovers.containsKey(r.album[0].title)){
-                            r.cover.postValue(downloadedCovers[r.album[0].title])
-                        } else{
-                            getCoverFromRepo(r.album[0].cover_path, r)
-                        }
-                    }
                     library.postValue(result)
                 }
             }
         }
     }
 
-    private fun getCoverFromRepo(path: String, music: MusicDTO) {
-        viewModelScope.launch(Dispatchers.IO) {
-            serverRepo.getResource(path) { result ->
-                val bitmap = BitmapFactory.decodeByteArray(result, 0, result!!.size)
-                music.cover.postValue(bitmap)
-                downloadedCovers[music.album[0].title] = bitmap
-            }
-        }
-    }
+//    private fun getArtistFromRepo(path: String, music: MusicDTO) {
+//        viewModelScope.launch(Dispatchers.IO) {
+//            serverRepo.getResource(path) { result ->
+//                val bitmap = BitmapFactory.decodeByteArray(result, 0, result!!.size)
+//                music.cover.postValue(bitmap)
+//                downloadedCovers[music.album[0]!!.title] = bitmap
+//            }
+//        }
+//    }
+//
+//    private fun getCoverFromRepo(path: String, music: MusicDTO) {
+//        viewModelScope.launch(Dispatchers.IO) {
+//            serverRepo.getResource(path) { result ->
+//                val bitmap = BitmapFactory.decodeByteArray(result, 0, result!!.size)
+//                music.cover.postValue(bitmap)
+//                downloadedCovers[music.album[0]!!.title] = bitmap
+//            }
+//        }
+//    }
 
 //    fun getResource(id: Int): ByteArray? {
 //        var response: ByteArray? = null

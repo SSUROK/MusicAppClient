@@ -38,7 +38,7 @@
                 android:textColor="@color/white"
                 android:textSize="@dimen/text_size_normal"
                 android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/addBtn"
                 app:layout_constraintStart_toEndOf="@id/coverImageSongElem"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -72,9 +72,21 @@
                 android:textSize="@dimen/text_size_normal"
                 android:textStyle="italic|bold"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/addBtn"
                 app:layout_constraintStart_toEndOf="@id/by"
                 app:layout_constraintTop_toBottomOf="@id/songNameSongElem" />
+
+            <ImageButton
+                android:id="@+id/addBtn"
+                android:layout_margin="@dimen/margin_default"
+                android:layout_width="50dp"
+                android:visibility="gone"
+                android:layout_height="50dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:src="@drawable/add_icon"
+                android:background="@android:color/transparent"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
